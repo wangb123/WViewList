@@ -1,0 +1,61 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+    compileSdkVersion rootProject.ext.config_compileSdkVersion
+    buildToolsVersion rootProject.ext.config_buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion rootProject.ext.config_targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
+
+        resourcePrefix "w_list_"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled true
+    }
+    lintOptions {
+        abortOnError false
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "$api_recyclerview"
+
+}
+repositories {
+    mavenCentral()
+}
+
+publish {
+    artifactId = 'listview'
+    publishVersion = '0.0.5'
+    desc = '基于Recylerview做的封装'
+    userOrg = rootProject.ext.pub_user
+    groupId = rootProject.ext.pub_group
+    repoName = rootProject.ext.pub_repo
+    website = rootProject.ext.pub_website
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="app_tab" type="id" />
+    <item name="app_tab1" type="id" />
+    <item name="app_tab2" type="id" />
+    <item name="app_tab3" type="id" />
+    <item name="app_tab4" type="id" />
+    <item name="app_tab5" type="id" />
+</resources>
