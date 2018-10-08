@@ -52,7 +52,7 @@ repositories {
 
 publish {
     artifactId = 'listview'
-    publishVersion = '0.0.5'
+    publishVersion = '0.0.7'
     desc = '基于Recylerview做的封装'
     userOrg = rootProject.ext.pub_user
     groupId = rootProject.ext.pub_group
