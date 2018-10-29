@@ -20,6 +20,7 @@ import java.util.List;
 
 public abstract class WAdapter<Data, Binding extends ViewDataBinding> extends RecyclerView.Adapter<WHolder<Binding>> {
     private List<Data> list;
+    private OnWHolderCreateListener<Binding> onWHolderCreateListener;
 
     WAdapter() {
     }
@@ -32,7 +33,18 @@ public abstract class WAdapter<Data, Binding extends ViewDataBinding> extends Re
                         .inflate(this.holderLayout(viewType), parent, false)
         );
         this.onViewHolderCreated(holder, viewType);
+        if (onWHolderCreateListener != null) {
+            onWHolderCreateListener.onCreate(parent, holder, viewType);
+        }
         return holder;
+    }
+
+    public void setOnWHolderCreateListener(OnWHolderCreateListener<Binding> onWHolderCreateListener) {
+        this.onWHolderCreateListener = onWHolderCreateListener;
+    }
+
+    public OnWHolderCreateListener<Binding> getOnWHolderCreateListener() {
+        return onWHolderCreateListener;
     }
 
     public int getItemCount() {
@@ -194,6 +206,10 @@ public abstract class WAdapter<Data, Binding extends ViewDataBinding> extends Re
         public void onBindViewHolder(WHolder<Binding> holder, int position) {
             holder.fill(this.variableId, this.getItem(position));
         }
+    }
+
+    public interface OnWHolderCreateListener<Binding extends ViewDataBinding> {
+        public void onCreate(@NonNull ViewGroup parent, WHolder<Binding> holder, int viewType);
     }
 }
 
